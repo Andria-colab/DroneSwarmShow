@@ -1,0 +1,22 @@
+# --- Python Basics ---
+__pycache__/
+*.pyc
+
+# --- Virtual Environment (CRITICAL) ---
+venv/
+.env
+
+# --- OS System Files ---
+.DS_Store
+
+# --- Project Data ---
+# Ignore the output videos (they are large and generated)
+Data/output/
+
+# Keep the input folder (so others can replicate your work)
+# But ignore temp files if any appear there
+Data/input/.DS_Store
+
+# --- IDE Settings ---
+.vscode/
+.idea/
