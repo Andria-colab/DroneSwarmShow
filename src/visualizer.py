@@ -1,18 +1,21 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
-from .config import SPACE_LIMITS, DT
+from .config import DT
 
-def animate_swarm(history_positions, filename=None):
-    """ Standard 3D Animation """
-    print("Preparing 3D animation...")
+# Note: We removed 'SPACE_LIMITS' from imports because we pass it in now
+
+def animate_swarm(history_positions, limits, filename=None):
+    """ Standard 3D Animation with custom limits """
+    print(f"Preparing 3D animation...")
     skip_frames = 5
     frames = history_positions[::skip_frames]
     
     fig = plt.figure(figsize=(10, 8))
     ax = fig.add_subplot(111, projection='3d')
     
-    (x_min, x_max), (y_min, y_max), (z_min, z_max) = SPACE_LIMITS
+    # Unpack the specific limits for this task
+    (x_min, x_max), (y_min, y_max), (z_min, z_max) = limits
     
     scatter = ax.scatter([], [], [], c='blue', s=5)
     
@@ -38,22 +41,18 @@ def animate_swarm(history_positions, filename=None):
         print(f"Saving 3D video to {filename}...")
         ani.save(filename, writer='ffmpeg', fps=30)
         print("3D Video saved!")
-    
-    # Only show if we didn't save (or if you want both, remove the 'else')
-    if not filename:
-        plt.show()
 
-def animate_swarm_2d(history_positions, filename=None):
-    """ Top-Down 2D Animation (X vs Y) """
-    print("Preparing 2D animation...")
+def animate_swarm_2d(history_positions, limits, filename=None):
+    """ Top-Down 2D Animation with custom limits """
+    print(f"Preparing 2D animation...")
     skip_frames = 5
     frames = history_positions[::skip_frames]
     
     fig, ax = plt.subplots(figsize=(10, 8))
     
-    (x_min, x_max), (y_min, y_max), _ = SPACE_LIMITS
+    # Unpack limits (ignore Z for 2D view)
+    (x_min, x_max), (y_min, y_max), _ = limits
     
-    # 2D Scatter plot
     scatter = ax.scatter([], [], c='red', s=10)
     
     def init():
@@ -67,7 +66,6 @@ def animate_swarm_2d(history_positions, filename=None):
 
     def update(frame_idx):
         current_pos = frames[frame_idx]
-        # We only take X (col 0) and Y (col 1)
         scatter.set_offsets(current_pos[:, :2])
         ax.set_title(f"2D View - Time: {frame_idx * DT * skip_frames:.2f} s")
         return scatter,
@@ -78,6 +76,3 @@ def animate_swarm_2d(history_positions, filename=None):
         print(f"Saving 2D video to {filename}...")
         ani.save(filename, writer='ffmpeg', fps=30)
         print("2D Video saved!")
-    
-    if not filename:
-        plt.show()

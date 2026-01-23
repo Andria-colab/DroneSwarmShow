@@ -6,7 +6,10 @@
 # from src.preprocessing import get_target_points
 
 from .config import *
-from .preprocessing import get_target_points
+from .preprocessing import get_target_points, get_text_points
 from .physics import compute_forces, velocity_saturation
 from .solver import rk4_step
 from .visualizer import animate_swarm, animate_swarm_2d
+from .video_processing import extract_video_targets
+
+

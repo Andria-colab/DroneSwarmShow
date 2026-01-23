@@ -1,9 +1,9 @@
 import numpy as np
 import os  # <--- Added this to create folders
 from src import (
-    N_DRONES, DT, TOTAL_TIME, SPACE_LIMITS,
+    N_DRONES, DT, TOTAL_TIME, TASK_LIMITS, 
     get_target_points, compute_forces, rk4_step, 
-    animate_swarm, animate_swarm_2d  # <--- Ensure both are imported
+    animate_swarm, animate_swarm_2d
 )
 
 def main():
@@ -13,7 +13,7 @@ def main():
     image_path = "Data/input/name.jpg" 
     
     try:
-        targets = get_target_points(image_path, n_drones=N_DRONES, z_height=10.0)
+        targets = get_target_points(image_path, n_drones=N_DRONES, z_height=10.0, scale=0.35)
         print(f"Targets generated successfully. Shape: {targets.shape}")
     except Exception as e:
         print(f"Error in preprocessing: {e}")
@@ -49,10 +49,11 @@ def main():
     os.makedirs("Data/output", exist_ok=True)
     
     # Save 3D Video
-    animate_swarm(history, filename="Data/output/task1_name_3d.mp4")
+    animate_swarm(history, TASK_LIMITS["task1"], filename="Data/output/task1_name_3d.mp4")
     
     # Save 2D Video
-    animate_swarm_2d(history, filename="Data/output/task1_name_2d.mp4")
+    animate_swarm_2d(history, TASK_LIMITS["task1"], filename="Data/output/task1_name_2d.mp4")
+    
     
     print("All Done! Check the 'Data/output' folder.")
 

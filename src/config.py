@@ -1,36 +1,46 @@
 import numpy as np
 
 # --- Simulation Parameters ---
-# Number of drones (You must determine this based on your name image)
-# Start with a safe number, we will update this dynamically in preprocessing later.
-N_DRONES = 500
+# Number of drones (Updated to 1000 as per your settings)
+N_DRONES = 1000
 
-# Time step for the simulation (keep it small for stability)
+# Time step for the simulation
 DT = 0.01  
 
-# Total simulation time (in seconds)
-TOTAL_TIME = 20.0  
+# Total simulation time (Increased to 40.0s to give them time to move)
+TOTAL_TIME = 60.0  
 
-# --- Physics Constants (from PDF Page 8) ---
-# [cite_start]Mass of each drone (assumed uniform) [cite: 103]
+# --- Physics Constants ---
+# Mass of each drone
 MASS = 1.0  
 
-# [cite_start]Maximum velocity magnitude [cite: 105]
+# Maximum velocity magnitude
 V_MAX = 5.0  
 
-# [cite_start]Attraction Gain (kp): How strongly they fly toward targets [cite: 62]
+# Attraction Gain (kp): Strength of flight toward targets
 K_P = 2.0  
 
-# [cite_start]Damping Coefficient (kd): Prevents infinite oscillation [cite: 68]
+# Damping Coefficient (kd): Stabilizes movement
 K_D = 1.5  
 
-# [cite_start]Repulsion Gain (k_rep): Strength of collision avoidance [cite: 108]
+# Repulsion Gain (k_rep): Strength of collision avoidance
 K_REP = 10.0  
 
-# [cite_start]Safety Radius (R_safe): Distance where repulsion activates [cite: 109]
+# Safety Radius (R_safe): Distance where repulsion activates
 R_SAFE = 0.8  
 
-# --- Canvas/Space Parameters ---
-# This defines the 3D box where drones can fly
-# Example: x from -10 to 10, y from -10 to 10, z from 0 to 20
-SPACE_LIMITS = ((-80, 80), (-80, 80), (0, 20))
+# --- GRAPH DIMENSIONS (Updated) ---
+# Replaces SPACE_LIMITS. 
+# Allows each task to have its own boundary size.
+# Format: ((min_x, max_x), (min_y, max_y), (min_z, max_z))
+
+TASK_LIMITS = {
+    # Task 1 (Name): Wide X to fit "Andria Beridze"
+    "task1": ((-300, 300), (-100, 100), (0, 20)),   
+    
+    # Task 2 (Greeting): Very wide X to fit "Happy New Year!"
+    "task2": ((-100, 100), (-40, 40), (0, 20)),   
+    
+    # Task 3 (Video): Usually square, so we keep X and Y equal
+    "task3": ((-100, 100), (-100, 100), (0, 30)),   
+}

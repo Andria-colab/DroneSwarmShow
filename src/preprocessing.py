@@ -67,3 +67,55 @@ if __name__ == "__main__":
     plt.axis('equal') # Crucial: Keeps the text from looking squashed
     plt.grid(True)
     plt.show()
+    
+    
+    
+    
+    # Task 2: Generate points for "Happy New Year!"
+
+def get_text_points(text, n_drones, z_height=10.0, scale=0.1):
+    """
+    Generates N target points for a specific text string (e.g., "Happy New Year!")
+    """
+    # 1. Create a blank black image
+    height, width = 200, 800
+    img = np.zeros((height, width), dtype=np.uint8)
+    
+    # 2. Write the text in white
+    font = cv2.FONT_HERSHEY_DUPLEX
+    font_scale = 2.0
+    thickness = 2
+    
+    # Center the text approximately
+    text_size = cv2.getTextSize(text, font, font_scale, thickness)[0]
+    text_x = (width - text_size[0]) // 2
+    text_y = (height + text_size[1]) // 2
+    
+    cv2.putText(img, text, (text_x, text_y), font, font_scale, (255), thickness)
+    
+    # 3. Extract points (Reuse logic from get_target_points)
+    # Find coordinates of all non-zero pixels
+    y_coords, x_coords = np.where(img > 0)
+    all_points = np.column_stack((x_coords, y_coords))
+    
+    total_points = all_points.shape[0]
+    
+    if total_points == 0:
+        raise ValueError("Text string is empty or font size is too small.")
+
+    # 4. Downsample to exactly N points
+    # If we have fewer pixels than drones, we reuse points (allow replacement)
+    replace_flag = total_points < n_drones
+    indices = np.random.choice(total_points, n_drones, replace=replace_flag)
+    selected_points = all_points[indices]
+    
+    # 5. Center and Scale
+    x_centered = selected_points[:, 0] - np.mean(selected_points[:, 0])
+    y_centered = selected_points[:, 1] - np.mean(selected_points[:, 1])
+    
+    targets = np.zeros((n_drones, 3))
+    targets[:, 0] = x_centered * scale
+    targets[:, 1] = -y_centered * scale
+    targets[:, 2] = z_height
+    
+    return targets
