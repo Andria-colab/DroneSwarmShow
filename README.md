@@ -35,8 +35,7 @@ DroneShow_Project/
 │   ├── preprocessing.py       # Image-to-points logic
 │   ├── video_processing.py    # Video-to-targets logic
 │   └── visualizer.py          # Matplotlib animation logic
-│
-├── create_video.py             # Helper script to create test video for Task 3
+│           
 ├── main_task1.py               # Execution script for Task 1 (formation control)
 ├── main_task2.py               # Execution script for Task 2 (transition flight)
 ├── main_task3.py               # Execution script for Task 3 (dynamic tracking)
