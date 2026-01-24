@@ -19,23 +19,26 @@ The project demonstrates three distinct capabilities:
 * **Matplotlib:** 3D and 2D visualization and animation.
 * **Runge-Kutta 4 (RK4):** High-precision numerical integration solver for stability.
   
-## Project structure
+## Project Structure
 
+```text
 DroneShow_Project/
 ├── Data/
-│   ├── input/           # Input images (name.jpg) and videos (video.mp4)
-│   └── output/          # Generated MP4 animations are saved here
+│   ├── input/                 # Input images (name.jpg) and videos (video.mp4)
+│   └── output/                # Generated MP4 animations
+│
 ├── src/
-│   ├── __init__.py      # Package initialization
-│   ├── config.py        # Physics constants (Mass, Kp, Kd) and Dimensions
-│   ├── physics.py       # Vectorized force calculations (Attraction/Repulsion)
-│   ├── solver.py        # Runge-Kutta 4 (RK4) integrator
-│   ├── preprocessing.py # Image-to-points logic
-│   ├── video_processing.py # Video-to-targets logic
-│   └── visualizer.py    # Matplotlib animation logic
-├── create_video.py      # Helper script to create test video for Task 3
-├── main_task1.py        # Execution script for Task 1
-├── main_task2.py        # Execution script for Task 2
-├── main_task3.py        # Execution script for Task 3
-├── requirements.txt     # List of python libraries
-└── README.md            # Project documentation
+│   ├── __init__.py            # Package initialization
+│   ├── config.py              # Physics constants (mass, Kp, Kd, dimensions)
+│   ├── physics.py             # Vectorized force calculations (attraction / repulsion)
+│   ├── solver.py              # Runge-Kutta 4 (RK4) integrator
+│   ├── preprocessing.py       # Image-to-points logic
+│   ├── video_processing.py    # Video-to-targets logic
+│   └── visualizer.py          # Matplotlib animation logic
+│
+├── create_video.py             # Helper script to create test video for Task 3
+├── main_task1.py               # Execution script for Task 1 (formation control)
+├── main_task2.py               # Execution script for Task 2 (transition flight)
+├── main_task3.py               # Execution script for Task 3 (dynamic tracking)
+├── requirements.txt            # Python dependencies
+└── README.md                   # Project documentation
