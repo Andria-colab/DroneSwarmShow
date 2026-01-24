@@ -1,8 +1,8 @@
-# Drone Swarm Simulation 🛸
+# Drone Swarm Simulation 
 
 A physics-based simulation of a massive drone swarm (1000 drones) performing formation control, complex transitions, and dynamic target tracking.
 
-## 📖 Project Overview
+## Project Overview
 
 This project simulates a swarm of quadcopters using **Ordinary Differential Equations (ODEs)** and **Potential Fields**.
 The simulation enforces realistic physics constraints including maximum velocity, collision avoidance (repulsion), and smooth damping.
