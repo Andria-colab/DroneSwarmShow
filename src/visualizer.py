@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from .config import DT
 
-# Note: We removed 'SPACE_LIMITS' from imports because we pass it in now
 
 def animate_swarm(history_positions, limits, filename=None):
     """ Standard 3D Animation with custom limits """
