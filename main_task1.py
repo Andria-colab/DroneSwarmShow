@@ -10,7 +10,7 @@ def main():
     print(f"--- Starting Drone Show Simulation (Task 1) ---")
     
     # 1. SETUP: Get Target Points from Image
-    image_path = "Data/input/name.jpg" 
+    image_path = "Data/input/name2.jpg" 
     
     try:
         targets = get_target_points(image_path, n_drones=N_DRONES, z_height=10.0, scale=0.35)
@@ -49,10 +49,10 @@ def main():
     os.makedirs("Data/output", exist_ok=True)
     
     # Save 3D Video
-    animate_swarm(history, TASK_LIMITS["task1"], filename="Data/output/task1_name_3d.mp4")
+    animate_swarm(history, TASK_LIMITS["task1"], filename="Data/output/task1_name2_3d.mp4")
     
     # Save 2D Video
-    animate_swarm_2d(history, TASK_LIMITS["task1"], filename="Data/output/task1_name_2d.mp4")
+    animate_swarm_2d(history, TASK_LIMITS["task1"], filename="Data/output/task1_name2_2d.mp4")
     
     
     print("All Done! Check the 'Data/output' folder.")
