@@ -24,20 +24,22 @@ The project demonstrates three distinct capabilities:
 ```text
 DroneShow_Project/
 ├── Data/
-│   ├── input/                 # Input images (name.jpg) and videos (video.mp4)
-│   └── output/                # Generated MP4 animations
+│   ├── input/                 # Input assets (name.jpg, name2.jpg, video.mp4)
+│   └── output/                # Generated simulation videos (*.mp4)
 │
 ├── src/
 │   ├── __init__.py            # Package initialization
 │   ├── config.py              # Physics constants (mass, Kp, Kd, dimensions)
-│   ├── physics.py             # Vectorized force calculations (attraction / repulsion)
+│   ├── physics.py             # Vectorized force calculations
 │   ├── solver.py              # Runge-Kutta 4 (RK4) integrator
 │   ├── preprocessing.py       # Image-to-points logic
 │   ├── video_processing.py    # Video-to-targets logic
 │   └── visualizer.py          # Matplotlib animation logic
 │           
-├── main_task1.py               # Execution script for Task 1 (formation control)
-├── main_task2.py               # Execution script for Task 2 (transition flight)
-├── main_task3.py               # Execution script for Task 3 (dynamic tracking)
-├── requirements.txt            # Python dependencies
-└── README.md                   # Project documentation
+├── .gitignore                 # Files to ignore in Git (e.g., venv, __pycache__)
+├── tasks.pdf                  # Original assignment task description
+├── main_task1.py              # Execution script for Task 1 (Formation)
+├── main_task2.py              # Execution script for Task 2 (Transition)
+├── main_task3.py              # Execution script for Task 3 (Tracking)
+├── requirements.txt           # Python dependencies
+└── README.md                  # Project overview and instructions
