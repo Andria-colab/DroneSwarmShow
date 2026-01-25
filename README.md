@@ -37,7 +37,7 @@ DroneShow_Project/
 │   └── visualizer.py          # Matplotlib animation logic
 │           
 ├── .gitignore                 # Files to ignore in Git (e.g., venv, __pycache__)
-├── tasks.pdf                  # Original assignment task description
+├── DroneSwarmSimulation.pdf   # Project Report / Documentation
 ├── main_task1.py              # Execution script for Task 1 (Formation)
 ├── main_task2.py              # Execution script for Task 2 (Transition)
 ├── main_task3.py              # Execution script for Task 3 (Tracking)
