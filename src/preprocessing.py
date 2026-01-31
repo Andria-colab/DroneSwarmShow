@@ -15,7 +15,7 @@ def get_target_points(image_path, n_drones, z_height=10.0, scale=0.1):
     
     # 2. IMPROVED: Adaptive Thresholding
     # This looks at local neighborhoods to separate ink from paper shadows.
-    # 11 is the block size, 10 is the constant subtracted from the mean.
+    # 15 is the block size, 10 is the constant subtracted from the mean.
     binary = cv2.adaptiveThreshold(img, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
                                    cv2.THRESH_BINARY_INV, 15, 10)
 
