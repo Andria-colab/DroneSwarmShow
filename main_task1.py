@@ -1,9 +1,9 @@
 import numpy as np
-import os  # <--- Added this to create folders
+import os
 from src import (
     N_DRONES, DT, TOTAL_TIME, TASK_LIMITS, 
     get_target_points, compute_forces, rk4_step, 
-    animate_swarm, animate_swarm_2d
+    animate_swarm, animate_swarm_2d, count_collisions 
 )
 
 def main():
@@ -19,12 +19,16 @@ def main():
         print(f"Error in preprocessing: {e}")
         return
 
-    # 2. INITIALIZATION: Start on ground
-    start_positions = np.random.rand(N_DRONES, 3) * 10.0
-    start_positions[:, 0] -= 5.0
-    start_positions[:, 1] -= 5.0
-    start_positions[:, 2] = 0.0
+    # 2. INITIALIZATION: Spread them out!
+    # Create a 50x50 meter area so 1000 drones have space
+    start_positions = np.random.rand(N_DRONES, 3) * 150.0 
     
+    # Center the starting area
+    start_positions[:, 0] -= 75.0
+    start_positions[:, 1] -= 75.0
+    
+    # Keep them on the ground (z=0)
+    start_positions[:, 2] = 0.0
     start_velocities = np.zeros((N_DRONES, 3))
     
     # 3. SIMULATION LOOP
@@ -41,11 +45,18 @@ def main():
             
         positions, velocities = rk4_step(positions, velocities, targets, DT)
         history.append(positions.copy())
-        
+
+        # Collision Check Every Step
+        crashes = count_collisions(positions, limit=0.15) # 0.15m = 15cm crash limit
+        if crashes > 0:
+            print(f"CRASH: {crashes} pairs collided at step {step}!")
+
+            
+    if crashes == 0:
+        print("No crashes detected during the simulation.")  
     print("Simulation complete. Saving videos...")
     
     # 4. VISUALIZATION & SAVING
-    # Create output directory if it doesn't exist
     os.makedirs("Data/output", exist_ok=True)
     
     # Save 3D Video
@@ -53,7 +64,6 @@ def main():
     
     # Save 2D Video
     animate_swarm_2d(history, TASK_LIMITS["task1"], filename="Data/output/task1_name2_2d.mp4")
-    
     
     print("All Done! Check the 'Data/output' folder.")
 

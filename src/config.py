@@ -8,26 +8,26 @@ N_DRONES = 1000
 DT = 0.01  
 
 # Total simulation time (Increased to 40.0s to give them time to move)
-TOTAL_TIME = 60.0  
+TOTAL_TIME = 100.0  
 
-# --- Physics Constants ---
-# Mass of each drone
+# --- Physics Constants (SAFE MODE) ---
 MASS = 1.0  
 
-# Maximum velocity magnitude
+# 1. SLOW DOWN: Reduce Max Speed (was 5.0)
 V_MAX = 5.0  
 
-# Attraction Gain (kp): Strength of flight toward targets
-K_P = 2.0  
+# 2. GENTLE PULL: Reduce Attraction so they don't rush (was 2.0)
+K_P = 1.0  
 
-# Damping Coefficient (kd): Stabilizes movement
-K_D = 1.5  
+# 3. HEAVY BRAKING: Increase Damping to stop oscillations (was 1.5)
+K_D = 4.0  
 
-# Repulsion Gain (k_rep): Strength of collision avoidance
-K_REP = 10.0  
+# 4. STRONG SHIELD: Massive Repulsion to prevent overlapping (was 10.0)
+# This is the most important change!
+K_REP = 200.0  
 
-# Safety Radius (R_safe): Distance where repulsion activates
-R_SAFE = 0.8  
+# 5. EARLY WARNING: Start repelling sooner (was 0.8)
+R_SAFE = 1.2
 
 # --- GRAPH DIMENSIONS (Updated) ---
 # Replaces SPACE_LIMITS. 
@@ -39,8 +39,8 @@ TASK_LIMITS = {
     "task1": ((-300, 300), (-100, 100), (0, 20)),   
     
     # Task 2 (Greeting): Very wide X to fit "Happy New Year!"
-    "task2": ((-100, 100), (-40, 40), (0, 20)),   
+    "task2": ((-120, 120), (-120, 120), (0, 20)),   
     
     # Task 3 (Video): Usually square, so we keep X and Y equal
-    "task3": ((-100, 100), (-100, 100), (0, 30)),   
+    "task3": ((-120, 120), (-120, 120), (0, 30)),   
 }

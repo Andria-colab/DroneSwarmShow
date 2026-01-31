@@ -57,3 +57,22 @@ def compute_forces(positions, velocities, targets):
     accelerations = total_force / MASS
     
     return accelerations
+
+
+
+def count_collisions(positions, limit=0.2):
+    """
+    Counts how many pairs of drones are closer than the physical crash limit (20cm).
+    """
+    # 1. Calculate all distances (Vectorized)
+    diff_matrix = positions[:, np.newaxis, :] - positions[np.newaxis, :, :]
+    dist_matrix = np.linalg.norm(diff_matrix, axis=2)
+    
+    # 2. Ignore distance to self (diagonal is 0)
+    np.fill_diagonal(dist_matrix, np.inf)
+    
+    # 3. Count crashes
+    # We divide by 2 because (Drone A -> Drone B) and (Drone B -> Drone A) are the same crash
+    num_crashes = np.sum(dist_matrix < limit) // 2
+    
+    return num_crashes
