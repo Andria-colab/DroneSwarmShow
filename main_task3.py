@@ -10,13 +10,13 @@ def main():
     print(f"--- Starting Task 3: Dynamic Video Tracking ---")
     
     # 1. SETUP
-    video_path = "Data/input/failure.mp4"
+    video_path = "Data/input/video.mp4"
     
     # 2. LOAD VIDEO TARGETS
     print("Extracting video frames...")
     try:
         # Ensure scale is consistent (0.8 or similar) to prevent overcrowding
-        video_frames = extract_video_targets(video_path, n_drones=N_DRONES, scale=0.8, sample_rate=1)
+        video_frames = extract_video_targets(video_path, n_drones=N_DRONES, scale=0.8, sample_rate=3)
     except Exception as e:
         print(f"Error: {e}")
         return
@@ -39,7 +39,7 @@ def main():
     
     # 4. SIMULATION LOOP
     # Sync Physics to Video FPS (approx 3-4 steps per frame)
-    steps_per_frame = 3 
+    steps_per_frame = 100
     
     total_steps = num_video_frames * steps_per_frame
     print(f"Simulating {total_steps} steps (approx {total_steps * DT:.1f} seconds)...")
@@ -67,8 +67,8 @@ def main():
     print("Saving videos...")
     os.makedirs("Data/output", exist_ok=True)
     
-    animate_swarm(history, TASK_LIMITS["task3"], filename="Data/output/task3_failure_video_3d.mp4")
-    animate_swarm_2d(history, TASK_LIMITS["task3"], filename="Data/output/task3_failure_video_2d.mp4")
+    animate_swarm(history, TASK_LIMITS["task3"], filename="Data/output/task3_video_3d.mp4")
+    animate_swarm_2d(history, TASK_LIMITS["task3"], filename="Data/output/task3_video_2d.mp4")
     print("Done! Check Data/output folder.")
 
 if __name__ == "__main__":
